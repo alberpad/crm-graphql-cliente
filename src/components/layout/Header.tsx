@@ -24,8 +24,11 @@ const Header = (props: IHeader) => {
         <div className="collapse navbar-collapse" id="navegacion">
           <ul className="navbar-nav ml-auto text-right">
             <li className="nav-item active">
-              <Link to="/clientes/nuevo" className="btn btn-primary text-light">
-                Nuevo Cliente
+              <Link to="/clientes" className="btn btn-danger text-light mr-2">
+                Listado de Clientes
+              </Link>
+              <Link to="/productos" className="btn btn-danger text-light">
+                Listado de Productos
               </Link>
             </li>
           </ul>

@@ -1,24 +1,16 @@
-import gql from "graphql-tag";
-
-export const GET_CLIENTES = gql`
-  {
-    getClientes {
-      id
-      nombre
-      apellido
-      empresa
-    }
-  }
-`;
 export interface IGetClientes {
   getClientes: Partial<ICliente>[];
+  totalClientes: number;
+}
+export interface IGetCliente {
+  getCliente: Partial<ICliente>;
 }
 export interface ICliente {
   id: string;
   nombre: string;
   apellido: string;
   empresa: string;
-  emails: string[];
+  emails: { email: string }[];
   edad: number;
   tipo: TipoCliente;
   pedidos: IPedidoInput[];
