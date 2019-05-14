@@ -22,7 +22,7 @@ export const ACTUALIZAR_PRODUCTO = gql`
 `;
 
 export const ELIMINAR_PRODUCTO = gql`
-  mutation eliminarProducto($id: ID) {
+  mutation eliminarProducto($id: ID!) {
     eliminarProducto(id: $id)
   }
 `;

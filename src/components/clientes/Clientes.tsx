@@ -7,55 +7,67 @@ import { IGetClientes } from "../../data/clientes/types";
 import Swal from "sweetalert2";
 import Spinner from "../Spinner";
 import Paginador from "../layout/Paginador";
+import withPaginador from "../hoc/withPaginador";
 
-export interface IClientesProps {}
-export interface IClientesState {
+export interface IClientesProps {
   paginador: {
     offset: number;
     actual: number;
+    limitePaginas: number;
+    paginaAnterior: () => void;
+    paginaSiguiente: () => void;
   };
 }
+export interface IClientesState {
+  // paginador: {
+  //   offset: number;
+  //   actual: number;
+  // };
+}
 class Clientes extends React.Component<IClientesProps, IClientesState> {
-  constructor(props: IClientesProps) {
-    super(props);
-    this.state = {
-      paginador: {
-        offset: 0,
-        actual: 1
-      }
-    };
-  }
+  // constructor(props: IClientesProps) {
+  //   super(props);
+  //   this.state = {
+  //     paginador: {
+  //       offset: 0,
+  //       actual: 1
+  //     }
+  //   };
+  // }
 
-  limitePaginas = 7;
+  // limitePaginas = 7;
 
-  paginaAnterior = () => {
-    this.setState({
-      paginador: {
-        offset: this.state.paginador.offset - this.limitePaginas,
-        actual: this.state.paginador.actual - 1
-      }
-    });
-  };
+  // paginaAnterior = () => {
+  //   this.setState({
+  //     paginador: {
+  //       offset: this.state.paginador.offset - this.limitePaginas,
+  //       actual: this.state.paginador.actual - 1
+  //     }
+  //   });
+  // };
 
-  paginaSiguiente = () => {
-    this.setState({
-      paginador: {
-        offset: this.state.paginador.offset + this.limitePaginas,
-        actual: this.state.paginador.actual + 1
-      }
-    });
-  };
+  // paginaSiguiente = () => {
+  //   this.setState({
+  //     paginador: {
+  //       offset: this.state.paginador.offset + this.limitePaginas,
+  //       actual: this.state.paginador.actual + 1
+  //     }
+  //   });
+  // };
 
   render() {
+    const { paginador } = this.props;
     return (
       //pollInterval es para recargar automaticamente la consulta y por ende la página
       // startPolling y stopPolling son necesarias aunque no se usen directamnte ?? Parece que no
       <Query
         query={GET_CLIENTES}
-        pollInterval={1000}
+        pollInterval={500}
         variables={{
-          limite: this.limitePaginas,
-          offset: this.state.paginador.offset
+          // limite: this.limitePaginas,
+          limite: paginador.limitePaginas,
+          // offset: this.state.paginador.offset
+          offset: paginador.offset
         }}
       >
         {({
@@ -71,13 +83,17 @@ class Clientes extends React.Component<IClientesProps, IClientesState> {
 
           return (
             <React.Fragment>
-              <h2 className="text-center">Listado de Clientes</h2>
-              <Link
-                to="/clientes/nuevo"
-                className="btn btn-danger text-light mr-2"
-              >
-                Nuevo Cliente
-              </Link>
+              <div>
+                <h2 className="inline-block">
+                  Listado de Clientes
+                  <Link
+                    to="/clientes/nuevo"
+                    className="btn btn-secondary text-light ml-4"
+                  >
+                    &#43;
+                  </Link>
+                </h2>
+              </div>
               <ul className="list-group mt-4">
                 {data.getClientes.map(cliente => {
                   const { id, nombre, apellido, empresa } = cliente;
@@ -88,6 +104,12 @@ class Clientes extends React.Component<IClientesProps, IClientesState> {
                           {nombre} {apellido} {empresa}
                         </div>
                         <div className="col-md-4 d-flex justify-content-end">
+                          <Link
+                            to={`/pedidos/nuevo/${id}`}
+                            className="btn btn-warning d-block d-md-inline-block mr-2"
+                          >
+                            &#43; Pedido
+                          </Link>
                           <Mutation mutation={ELIMINAR_CLIENTE}>
                             {(eliminarCliente: MutationFn) => (
                               <button
@@ -138,11 +160,15 @@ class Clientes extends React.Component<IClientesProps, IClientesState> {
                 })}
               </ul>
               <Paginador
-                actual={this.state.paginador.actual}
-                totalClientes={data.totalClientes}
-                limitePaginas={this.limitePaginas}
-                paginaAnterior={this.paginaAnterior}
-                paginaSiguiente={this.paginaSiguiente}
+                // actual={this.state.paginador.actual}
+                actual={paginador.actual}
+                total={data.totalClientes}
+                // limitePaginas={this.limitePaginas}
+                limitePaginas={paginador.limitePaginas}
+                // paginaAnterior={this.paginaAnterior}
+                paginaAnterior={paginador.paginaAnterior}
+                // paginaSiguiente={this.paginaSiguiente}
+                paginaSiguiente={paginador.paginaSiguiente}
               />
             </React.Fragment>
           );
@@ -152,4 +178,4 @@ class Clientes extends React.Component<IClientesProps, IClientesState> {
   }
 }
 
-export default Clientes;
+export default withPaginador(5, Clientes);

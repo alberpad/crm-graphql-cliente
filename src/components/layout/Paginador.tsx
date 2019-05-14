@@ -2,7 +2,7 @@ import * as React from "react";
 
 export interface IPaginadorProps {
   actual: number;
-  totalClientes: number;
+  total: number;
   limitePaginas: number;
   paginaAnterior: () => void;
   paginaSiguiente: () => void;
@@ -23,7 +23,7 @@ export default class Paginador extends React.Component<
 
     this.state = {
       paginador: {
-        paginas: Math.ceil(this.props.totalClientes / this.props.limitePaginas)
+        paginas: Math.ceil(this.props.total / this.props.limitePaginas)
       }
     };
   }

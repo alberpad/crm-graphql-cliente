@@ -81,6 +81,10 @@ class FormularioEditarCliente extends Component<
     });
   };
 
+  handleOnClickCancelar = (e: React.MouseEvent) => {
+    this.props.history.push("/clientes");
+  };
+
   render() {
     const { emails } = this.state;
     const { nombre, tipo, empresa, edad, apellido } = this.state.cliente;
@@ -199,9 +203,17 @@ class FormularioEditarCliente extends Component<
                 </select>
               </div>
             </div>
-            <button type="submit" className="btn btn-success float-right">
-              Guardar Cambios
-            </button>
+            <div className="float-right">
+              <button type="submit" className="btn btn-success">
+                Guardar Cambios
+              </button>
+              <button
+                onClick={this.handleOnClickCancelar}
+                className="btn btn-success ml-2"
+              >
+                Cancelar
+              </button>
+            </div>
           </form>
         )}
       </Mutation>

@@ -4,68 +4,81 @@ import { Query, Mutation, QueryResult, MutationFn } from "react-apollo";
 import { GET_PRODUCTOS } from "../../data/productos/queries";
 import { IGetProductos } from "../../data/productos/types";
 import Spinner from "../Spinner";
-import { isTemplateElement } from "@babel/types";
 import { ELIMINAR_PRODUCTO } from "../../data/productos/mutations";
 import Swal from "sweetalert2";
 import Paginador from "../layout/Paginador";
+import withPaginador from "../../components/hoc/withPaginador";
 
-export interface IProductosProps {}
-
-export interface IProductosState {
+export interface IProductosProps {
   paginador: {
     offset: number;
     actual: number;
+    limitePaginas: number;
+    paginaAnterior: () => void;
+    paginaSiguiente: () => void;
   };
 }
 
-export default class Productos extends React.Component<
-  IProductosProps,
-  IProductosState
-> {
-  constructor(props: IProductosProps) {
-    super(props);
+export interface IProductosState {
+  // paginador: {
+  //   offset: number;
+  //   actual: number;
+  // };
+}
 
-    this.state = {
-      paginador: {
-        offset: 0,
-        actual: 1
-      }
-    };
-  }
+class Productos extends React.Component<IProductosProps, IProductosState> {
+  // constructor(props: IProductosProps) {
+  //   super(props);
 
-  limitePaginas = 7;
+  //   this.state = {
+  //     paginador: {
+  //       offset: 0,
+  //       actual: 1
+  //     }
+  //   };
+  // }
 
-  paginaAnterior = () => {
-    this.setState({
-      paginador: {
-        offset: this.state.paginador.offset - this.limitePaginas,
-        actual: this.state.paginador.actual - 1
-      }
-    });
-  };
+  // limitePaginas = 7;
 
-  paginaSiguiente = () => {
-    this.setState({
-      paginador: {
-        offset: this.state.paginador.offset + this.limitePaginas,
-        actual: this.state.paginador.actual + 1
-      }
-    });
-  };
+  // paginaAnterior = () => {
+  //   this.setState({
+  //     paginador: {
+  //       offset: this.state.paginador.offset - this.limitePaginas,
+  //       actual: this.state.paginador.actual - 1
+  //     }
+  //   });
+  // };
+
+  // paginaSiguiente = () => {
+  //   this.setState({
+  //     paginador: {
+  //       offset: this.state.paginador.offset + this.limitePaginas,
+  //       actual: this.state.paginador.actual + 1
+  //     }
+  //   });
+  // };
 
   public render() {
+    const { paginador } = this.props;
     return (
       <React.Fragment>
-        <h2 className="text-center">Listado de Productos</h2>
-        <Link to="/productos/nuevo" className="btn btn-danger text-light">
-          Nuevo Producto
-        </Link>
+        <h2 className="text-left">
+          Listado de Productos
+          <Link
+            to="/productos/nuevo"
+            className="btn btn-danger text-light ml-4"
+          >
+            +
+          </Link>
+        </h2>
         <Query
           query={GET_PRODUCTOS}
-          pollInterval={1000}
+          pollInterval={500}
           variables={{
-            limite: this.limitePaginas,
-            offset: this.state.paginador.offset
+            // limite: this.limitePaginas,
+            limite: paginador.limitePaginas,
+            // offset: this.state.paginador.offset
+            offset: paginador.offset
           }}
         >
           {({
@@ -119,7 +132,7 @@ export default class Productos extends React.Component<
                               {(eliminarProducto: MutationFn) => (
                                 <button
                                   type="button"
-                                  className="btn btn-danger d-block d-md-inline-clock"
+                                  className="btn btn-danger"
                                   onClick={() => {
                                     Swal.fire({
                                       title: "Estás seguro?",
@@ -159,11 +172,15 @@ export default class Productos extends React.Component<
                   </tbody>
                 </table>
                 <Paginador
-                  actual={this.state.paginador.actual}
-                  totalClientes={data.totalProductos}
-                  limitePaginas={this.limitePaginas}
-                  paginaAnterior={this.paginaAnterior}
-                  paginaSiguiente={this.paginaSiguiente}
+                  // actual={this.state.paginador.actual}
+                  actual={paginador.actual}
+                  total={data.totalProductos}
+                  // limitePaginas={this.limitePaginas}
+                  limitePaginas={paginador.limitePaginas}
+                  // paginaAnterior={this.paginaAnterior}
+                  paginaAnterior={paginador.paginaAnterior}
+                  // paginaSiguiente={this.paginaSiguiente}
+                  paginaSiguiente={paginador.paginaSiguiente}
                 />
               </React.Fragment>
             );
@@ -173,3 +190,4 @@ export default class Productos extends React.Component<
     );
   }
 }
+export default withPaginador(5, Productos);

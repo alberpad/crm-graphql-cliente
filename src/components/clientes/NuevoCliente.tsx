@@ -76,6 +76,10 @@ class NuevoCliente extends React.Component<
     });
   };
 
+  handleOnClickCancelar = (e: React.MouseEvent) => {
+    this.props.history.push("/clientes");
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -185,9 +189,17 @@ class NuevoCliente extends React.Component<
                     </select>
                   </div>
                 </div>
-                <button type="submit" className="btn btn-success float-right">
-                  Guardar Cliente
-                </button>
+                <div className="float-right">
+                  <button type="submit" className="btn btn-success">
+                    Guardar Cliente
+                  </button>
+                  <button
+                    onClick={this.handleOnClickCancelar}
+                    className="btn btn-success ml-2"
+                  >
+                    Cancelar
+                  </button>
+                </div>
               </form>
             )}
           </Mutation>

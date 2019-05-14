@@ -59,6 +59,10 @@ class NuevoProducto extends React.Component<
     return !nombre || !precio || !stock;
   };
 
+  handleOnClickCancelar = (e: React.MouseEvent) => {
+    this.props.history.push("/productos");
+  };
+
   public render() {
     return (
       <React.Fragment>
@@ -122,13 +126,21 @@ class NuevoProducto extends React.Component<
                     onChange={this.handleOnChangeForm}
                   />
                 </div>
-                <button
-                  disabled={this.validarForm()}
-                  type="submit"
-                  className="btn btn-success float-right"
-                >
-                  Crear Producto
-                </button>
+                <div className="float-right">
+                  <button
+                    disabled={this.validarForm()}
+                    type="submit"
+                    className="btn btn-success"
+                  >
+                    Crear Producto
+                  </button>
+                  <button
+                    onClick={this.handleOnClickCancelar}
+                    className="btn btn-success ml-2"
+                  >
+                    Cancelar
+                  </button>
+                </div>
               </form>
             )}
           </Mutation>

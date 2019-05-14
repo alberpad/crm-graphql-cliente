@@ -23,13 +23,37 @@ const Header = (props: IHeader) => {
 
         <div className="collapse navbar-collapse" id="navegacion">
           <ul className="navbar-nav ml-auto text-right">
-            <li className="nav-item active">
-              <Link to="/clientes" className="btn btn-danger text-light mr-2">
-                Listado de Clientes
-              </Link>
-              <Link to="/productos" className="btn btn-danger text-light">
-                Listado de Productos
-              </Link>
+            <li className="nav-item dropdown mr-md-2 mb-2 mb-md-0">
+              <button
+                className="nav-link dropdown-toggle btn btn-block btn-primary"
+                data-toggle="dropdown"
+              >
+                Clientes
+              </button>
+              <div className="dropdown-menu" aria-labelledby="navegacion">
+                <Link to="/clientes" className="dropdown-item">
+                  Listado de Clientes
+                </Link>
+                <Link to="/clientes/nuevo" className="dropdown-item">
+                  Nuevo Cliente
+                </Link>
+              </div>
+            </li>
+            <li className="nav-item dropdown">
+              <button
+                className="nav-link dropdown-toggle btn btn-block btn-primary"
+                data-toggle="dropdown"
+              >
+                Productos
+              </button>
+              <div className="dropdown-menu" aria-labelledby="navegacion">
+                <Link to="/productos" className="dropdown-item">
+                  Listado de Productos
+                </Link>
+                <Link to="/productos/nuevo" className="dropdown-item">
+                  Nuevo Producto
+                </Link>
+              </div>
             </li>
           </ul>
         </div>
