@@ -1,8 +1,8 @@
 import React from "react";
 import { Query, QueryResult } from "react-apollo";
-import { GET_CLIENTE } from "../../data/clientes/queries";
+import { GET_CLIENTE } from "../../data/queries";
 import Spinner from "../Spinner";
-import { IGetCliente } from "../../data/clientes/types";
+import { IGetCliente } from "../../data/types";
 
 export interface IDatosClienteProps {
   id: string;

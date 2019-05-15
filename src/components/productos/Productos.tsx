@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Query, Mutation, QueryResult, MutationFn } from "react-apollo";
-import { GET_PRODUCTOS } from "../../data/productos/queries";
-import { IGetProductos } from "../../data/productos/types";
+import { GET_PRODUCTOS } from "../../data/queries";
+import { IGetProductos } from "../../data/types";
 import Spinner from "../Spinner";
-import { ELIMINAR_PRODUCTO } from "../../data/productos/mutations";
+import { ELIMINAR_PRODUCTO } from "../../data/mutations";
 import Swal from "sweetalert2";
 import Paginador from "../layout/Paginador";
 import withPaginador from "../../components/hoc/withPaginador";

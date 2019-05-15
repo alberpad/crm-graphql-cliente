@@ -1,10 +1,11 @@
 import * as React from "react";
-import { IProducto } from "../../data/productos/types";
+import { IProducto } from "../../data/types";
 import Select from "react-select";
 import Animated from "react-select/lib/animated";
 import { ValueType } from "react-select/lib/types";
 import ResumenPedido from "./ResumenPedido";
-import { IProductosPedidos } from "../../data/pedidos/typs";
+import { IProductosPedidos } from "../../data/types";
+import GenerarPedido from "./GenerarPedido";
 
 export interface IContenidoPedidoProps {
   productos: IProducto[];
@@ -102,6 +103,11 @@ export default class ContenidoPedido extends React.Component<
           Total:
           <span className="font-weight-normal">$ {this.state.total}</span>
         </p>
+        <GenerarPedido
+          productos={this.state.productosPedidos}
+          total={this.state.total}
+          clienteId={this.props.id}
+        />
       </div>
     );
   }

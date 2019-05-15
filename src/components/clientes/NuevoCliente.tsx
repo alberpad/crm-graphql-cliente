@@ -1,6 +1,6 @@
 import React from "react";
-import { ICliente } from "../../data/clientes/types";
-import { NUEVO_CLIENTE } from "../../data/clientes/mutations";
+import { ICliente } from "../../data/types";
+import { NUEVO_CLIENTE } from "../../data/mutations";
 import { Mutation, MutationFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 

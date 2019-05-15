@@ -1,8 +1,8 @@
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import { Query, QueryResult } from "react-apollo";
-import { IGetCliente, ICliente } from "../../data/clientes/types";
-import { GET_CLIENTE } from "../../data/clientes/queries";
+import { IGetCliente, ICliente } from "../../data/types";
+import { GET_CLIENTE } from "../../data/queries";
 import FormularioEditarCliente from "./FormularioEditarCliente";
 import Spinner from "../Spinner";
 

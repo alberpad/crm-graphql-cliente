@@ -1,7 +1,7 @@
 import React from "react";
 import { Query, QueryResult } from "react-apollo";
-import { GET_PRODUCTOS } from "../../data/productos/queries";
-import { IGetProductos, IProducto } from "../../data/productos/types";
+import { GET_PRODUCTOS } from "../../data/queries";
+import { IGetProductos, IProducto } from "../../data/types";
 import Spinner from "../Spinner";
 
 export interface IWithProductosProps {}

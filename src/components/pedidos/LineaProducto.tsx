@@ -1,5 +1,5 @@
 import React from "react";
-import { IProducto } from "../../data/productos/types";
+import { IProducto } from "../../data/types";
 
 export interface ILineaProductoProps {
   id: string;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Mutation, MutationFn, MutationResult } from "react-apollo";
-import { NUEVO_PRODUCTO } from "../../data/productos/mutations";
+import { NUEVO_PRODUCTO } from "../../data/mutations";
 import { RouteComponentProps } from "react-router-dom";
 
 export interface INuevoProductoProps {}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { ICliente, IGetCliente } from "../../data/clientes/types";
-import { ACTUALIZAR_CLIENTE } from "../../data/clientes/mutations";
+import { ICliente, IGetCliente } from "../../data/types";
+import { ACTUALIZAR_CLIENTE } from "../../data/mutations";
 import { Mutation, MutationFn, OperationVariables } from "react-apollo";
 import { RouteComponentProps, withRouter } from "react-router";
 import { ApolloQueryResult } from "apollo-boost";
@@ -82,7 +82,7 @@ class FormularioEditarCliente extends Component<
   };
 
   handleOnClickCancelar = (e: React.MouseEvent) => {
-    this.props.history.push("/clientes");
+    this.props.history.push("");
   };
 
   render() {
@@ -96,7 +96,7 @@ class FormularioEditarCliente extends Component<
         onCompleted={() =>
           this.props.refetch().then(() => {
             //refetch fuerza a tener los valores actualizados, no los cacheados por apollo
-            this.props.history.push("/clientes");
+            this.props.history.push("");
           })
         }
       >

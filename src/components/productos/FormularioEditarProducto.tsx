@@ -1,9 +1,9 @@
 import * as React from "react";
-import { IProducto, IGetProducto } from "../../data/productos/types";
+import { IProducto, IGetProducto } from "../../data/types";
 import { OperationVariables, MutationFn, Mutation } from "react-apollo";
 import { ApolloQueryResult } from "apollo-boost";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { ACTUALIZAR_PRODUCTO } from "../../data/productos/mutations";
+import { ACTUALIZAR_PRODUCTO } from "../../data/mutations";
 
 export interface IFormularioEditarProductoProps extends RouteComponentProps {
   producto: Partial<IProducto>;

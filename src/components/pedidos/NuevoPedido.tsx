@@ -2,7 +2,7 @@ import React from "react";
 import { RouteComponentProps } from "react-router";
 import { DatosCliente } from "../clientes/DatosCliente";
 import withProductos from "../hoc/withProductos";
-import { IProducto } from "../../data/productos/types";
+import { IProducto } from "../../data/types";
 import ContenidoPedido from "./ContenidoPedido";
 
 export interface INuevoPedidoProps extends RouteComponentProps<{ id: string }> {

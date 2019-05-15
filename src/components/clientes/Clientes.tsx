@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Query, QueryResult, Mutation, MutationFn } from "react-apollo";
-import { GET_CLIENTES } from "../../data/clientes/queries";
-import { ELIMINAR_CLIENTE } from "../../data/clientes/mutations";
-import { IGetClientes } from "../../data/clientes/types";
+import { GET_CLIENTES } from "../../data/queries";
+import { ELIMINAR_CLIENTE } from "../../data/mutations";
+import { IGetClientes } from "../../data/types";
 import Swal from "sweetalert2";
 import Spinner from "../Spinner";
 import Paginador from "../layout/Paginador";
