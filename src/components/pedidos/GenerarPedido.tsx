@@ -26,7 +26,8 @@ const handleOnClickGenerarPedido = (
     productos: props.productos.map(
       ({ nombre, precio, stock, ...resto }) => resto
     ),
-    total: props.total
+    total: props.total,
+    id: ""
   };
   nuevoPedido({
     variables: { input }

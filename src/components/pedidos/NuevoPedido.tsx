@@ -40,4 +40,4 @@ class NuevoPedido extends React.Component<
   }
 }
 
-export default withProductos(NuevoPedido);
+export default withProductos(true, NuevoPedido);

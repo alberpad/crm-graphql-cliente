@@ -6,6 +6,7 @@ import { ValueType } from "react-select/lib/types";
 import ResumenPedido from "./ResumenPedido";
 import { IProductosPedidos } from "../../data/types";
 import GenerarPedido from "./GenerarPedido";
+import Error from "../Alertas/Error";
 
 export interface IContenidoPedidoProps {
   productos: IProducto[];
@@ -81,8 +82,14 @@ export default class ContenidoPedido extends React.Component<
 
   public render() {
     const { productosPedidos } = this.state;
+    const mensaje =
+      this.state.total < 0 ? (
+        <Error error="Las Cantidades no pueden ser negativas" />
+      ) : (
+        ""
+      );
     return (
-      <div>
+      <React.Fragment>
         <h2 className="text-center mb-5">Seleccionar artículos</h2>
         <Select<IProducto>
           options={this.props.productos}
@@ -103,12 +110,13 @@ export default class ContenidoPedido extends React.Component<
           Total:
           <span className="font-weight-normal">$ {this.state.total}</span>
         </p>
+        {mensaje}
         <GenerarPedido
           productos={this.state.productosPedidos}
           total={this.state.total}
           clienteId={this.props.id}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

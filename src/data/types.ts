@@ -43,11 +43,15 @@ export interface IProductosPedidos extends IProducto {
 }
 
 export interface IPedido {
+  id: string;
   productos: IPedidoProducto[];
   total: number;
   cliente: string;
   estado?: string;
   fecha?: Date;
+}
+export interface IGetPedidos {
+  getPedidos: Partial<IPedido>[];
 }
 
 export interface IPedidoProducto {

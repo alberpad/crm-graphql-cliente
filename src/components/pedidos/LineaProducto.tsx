@@ -1,5 +1,6 @@
 import React from "react";
 import { IProducto } from "../../data/types";
+import Swal from "sweetalert2";
 
 export interface ILineaProductoProps {
   id: string;
@@ -26,9 +27,19 @@ class LineaProducto extends React.Component<
   }
 
   handleOnChangeCantidad = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cantidad = Number(e.currentTarget.value);
-    const { index } = this.props;
-    if (cantidad < 0) return;
+    let cantidad = Number(e.currentTarget.value);
+    const { index, producto } = this.props;
+    if (cantidad > producto.stock) {
+      cantidad = 0;
+      e.target.value = "0";
+      Swal.fire({
+        type: "error",
+        title: "Lo Sentimos",
+        text: "No hay stock suficiente!",
+        footer: "<a href>Avísenme cuando haya</a>"
+      });
+    }
+
     this.setState({
       cantidad
     });
@@ -45,6 +56,7 @@ class LineaProducto extends React.Component<
           <td className="text-center">{producto.stock}</td>
           <td>
             <input
+              min="1"
               type="number"
               className="form-control"
               onChange={this.handleOnChangeCantidad}

@@ -10,6 +10,7 @@ import Productos from "./components/productos/Productos";
 import NuevoProducto from "./components/productos/NuevoProducto";
 import EditarProducto from "./components/productos/EditarProducto";
 import NuevoPedido from "./components/pedidos/NuevoPedido";
+import PedidosCliente from "./components/pedidos/PedidosCliente";
 
 // cache -> InMemoryCache -> addTypename: false : Eliminar el añadido automatico de __typename en los objetos
 const apolloClient = new ApolloClient({
@@ -47,6 +48,7 @@ const App: React.FC = () => {
                 component={EditarProducto}
               />
               <Route exact path="/pedidos/nuevo/:id" component={NuevoPedido} />
+              <Route exact path="/pedidos/:id" component={PedidosCliente} />
             </Switch>
           </div>
         </React.Fragment>

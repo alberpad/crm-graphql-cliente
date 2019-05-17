@@ -9,6 +9,7 @@ export interface IWithProductosProps {}
 export interface IWithProductosState {}
 
 function withProductos<P extends IWithProductosProps>(
+  stock: boolean, // true para obtener productos con stock > 1
   WrappedComponent: React.ComponentType<P>
 ) {
   return class extends React.Component<
@@ -23,7 +24,7 @@ function withProductos<P extends IWithProductosProps>(
 
     public render() {
       return (
-        <Query query={GET_PRODUCTOS}>
+        <Query query={GET_PRODUCTOS} variables={{ stock: stock }}>
           {({
             loading,
             error,
