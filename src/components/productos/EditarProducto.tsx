@@ -2,7 +2,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import { Query, QueryResult } from "react-apollo";
 import { GET_PRODUCTO } from "../../data/queries";
-import { IGetProducto, IProducto } from "../../data/types";
+import { IGetProducto } from "../../data/types";
 import Spinner from "../Spinner";
 import FormularioEditarProducto from "./FormularioEditarProducto";
 

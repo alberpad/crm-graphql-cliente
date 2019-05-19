@@ -82,6 +82,30 @@ export const NUEVO_PEDIDO = gql`
     }
   }
 `;
+export const ACTUALIZAR_PEDIDO = gql`
+  mutation actualizarPedido($input: PedidoInput) {
+    actualizarPedido(input: $input) {
+      id
+      cliente
+      fecha
+      estado
+      productos {
+        id
+        cantidad
+      }
+      total
+    }
+  }
+`;
 /**
  * FIN MUTACIONES DE PEDIDOS
  */
+
+/**
+ * MUTACIONES DE USUARIOS
+ */
+export const NUEVO_USUARIO = gql`
+  mutation crearUsuario($input: UsuarioInput) {
+    crearUsuario(input: $input)
+  }
+`;

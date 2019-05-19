@@ -38,6 +38,11 @@ export interface IProducto {
   stock: number;
 }
 
+export interface IUsuario {
+  usuario: string;
+  password: string;
+}
+
 export interface IProductosPedidos extends IProducto {
   cantidad: number;
 }
@@ -57,4 +62,13 @@ export interface IGetPedidos {
 export interface IPedidoProducto {
   id: string;
   cantidad: number;
+}
+
+export interface IMejorCliente {
+  total: number;
+  cliente: ICliente[];
+}
+
+export interface ITopClientes {
+  topClientes: IMejorCliente[];
 }

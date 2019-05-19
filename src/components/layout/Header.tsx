@@ -28,6 +28,22 @@ const Header = (props: IHeader) => {
                 className="nav-link dropdown-toggle btn btn-block btn-primary"
                 data-toggle="dropdown"
               >
+                Administración
+              </button>
+              <div className="dropdown-menu" aria-labelledby="navegacion">
+                <Link to="/panel" className="dropdown-item">
+                  Panel
+                </Link>
+                <Link to="/registro" className="dropdown-item">
+                  Registro
+                </Link>
+              </div>
+            </li>
+            <li className="nav-item dropdown mr-md-2 mb-2 mb-md-0">
+              <button
+                className="nav-link dropdown-toggle btn btn-block btn-primary"
+                data-toggle="dropdown"
+              >
                 Clientes
               </button>
               <div className="dropdown-menu" aria-labelledby="navegacion">

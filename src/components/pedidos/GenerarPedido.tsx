@@ -2,8 +2,9 @@ import React from "react";
 import { IProductosPedidos } from "../../data/types";
 import { Mutation, MutationFn } from "react-apollo";
 import { NUEVO_PEDIDO } from "../../data/mutations";
-import { IPedidoProducto, IPedido } from "../../data/types";
+import { IPedido } from "../../data/types";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { History } from "history";
 
 export interface IGenerarPedidoProps extends RouteComponentProps {
   productos: IProductosPedidos[];
@@ -34,6 +35,10 @@ const handleOnClickGenerarPedido = (
   });
 };
 
+const handleOnClickCancelar = (e: React.MouseEvent, history: History) => {
+  history.push("/clientes");
+};
+
 const GenerarPedido = (props: IGenerarPedidoProps) => {
   return (
     <Mutation
@@ -41,14 +46,22 @@ const GenerarPedido = (props: IGenerarPedidoProps) => {
       onCompleted={() => props.history.push("/clientes")}
     >
       {(nuevoPedido: MutationFn) => (
-        <button
-          disabled={validarPedido(props)}
-          type="button"
-          className="btn btn-warning mt-4"
-          onClick={e => handleOnClickGenerarPedido(e, nuevoPedido, props)}
-        >
-          Generar Pedido
-        </button>
+        <React.Fragment>
+          <button
+            disabled={validarPedido(props)}
+            type="button"
+            className="btn btn-warning mt-4"
+            onClick={e => handleOnClickGenerarPedido(e, nuevoPedido, props)}
+          >
+            Generar Pedido
+          </button>
+          <button
+            onClick={e => handleOnClickCancelar(e, props.history)}
+            className="btn btn-secondary ml-2 mt-4"
+          >
+            Cancelar
+          </button>
+        </React.Fragment>
       )}
     </Mutation>
   );

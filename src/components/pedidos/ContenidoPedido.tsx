@@ -53,7 +53,7 @@ export default class ContenidoPedido extends React.Component<
   eliminarProducto = (id: string) => {
     const { productosPedidos } = this.state;
     const productosRestantes = productosPedidos.filter(
-      producto => producto.id != id
+      producto => producto.id !== id
     );
     this.setState(
       {

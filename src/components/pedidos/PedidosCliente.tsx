@@ -25,7 +25,6 @@ const PedidosCliente = (props: IPedidosClienteProps) => {
             if (loading) return <Spinner />;
             if (error) return `Error ${error.message}`;
             if (!data) return "";
-            // console.log(data);
             return data.getPedidos.map(pedido => (
               <PedidoCliente key={pedido.id} pedido={pedido} />
             ));

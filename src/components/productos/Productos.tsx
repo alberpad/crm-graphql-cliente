@@ -113,12 +113,20 @@ class Productos extends React.Component<IProductosProps, IProductosState> {
                   </thead>
                   <tbody>
                     {data.getProductos.map(producto => {
-                      const { id } = producto;
+                      const { id, stock } = producto;
+                      let clase =
+                        stock && stock < 5
+                          ? "badge badge-pill badge-danger"
+                          : stock && stock < 10
+                          ? "badge badge-pill badge-warning"
+                          : "";
                       return (
                         <tr key={id}>
                           <td>{producto.nombre}</td>
                           <td className="text-center">{producto.precio}</td>
-                          <td className="text-center">{producto.stock}</td>
+                          <td className="text-center">
+                            <span className={clase}>{producto.stock}</span>
+                          </td>
                           <td className="text-center">
                             <Link
                               to={`/productos/editar/${id}`}
