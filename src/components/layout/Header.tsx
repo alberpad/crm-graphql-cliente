@@ -37,6 +37,9 @@ const Header = (props: IHeader) => {
                 <Link to="/registro" className="dropdown-item">
                   Registro
                 </Link>
+                <Link to="/login" className="dropdown-item">
+                  Login
+                </Link>
               </div>
             </li>
             <li className="nav-item dropdown mr-md-2 mb-2 mb-md-0">

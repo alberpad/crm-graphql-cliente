@@ -72,3 +72,9 @@ export interface IMejorCliente {
 export interface ITopClientes {
   topClientes: IMejorCliente[];
 }
+
+export interface IDataAutenticar {
+  autenticarUsuario: {
+    token: string;
+  };
+}

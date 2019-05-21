@@ -18,6 +18,16 @@ import Login from "./components/Auth/Login";
 // cache -> InMemoryCache -> addTypename: false : Eliminar el añadido automatico de __typename en los objetos
 const apolloClient = new ApolloClient({
   uri: "http://localhost:5000/graphql",
+  // Enviar Token al Servidor
+  fetchOptions: {
+    credentials: "include"
+  },
+  request: async operation => {
+    const token = localStorage.getItem("token");
+    await operation.setContext({
+      headers: { authorization: token }
+    });
+  },
   cache: new InMemoryCache({
     addTypename: false
   }),

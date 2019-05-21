@@ -109,3 +109,11 @@ export const NUEVO_USUARIO = gql`
     crearUsuario(input: $input)
   }
 `;
+
+export const AUTENTICAR_USUARIO = gql`
+  mutation autenticarUsuario($input: UsuarioInput) {
+    autenticarUsuario(input: $input) {
+      token
+    }
+  }
+`;
