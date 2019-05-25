@@ -1,12 +1,13 @@
 import React from "react";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { DatosCliente } from "../clientes/DatosCliente";
 import withProductos from "../hoc/withProductos";
-import { IProducto } from "../../data/types";
+import { IProducto, IGetUsuario } from "../../data/types";
 import ContenidoPedido from "./ContenidoPedido";
 
 export interface INuevoPedidoProps extends RouteComponentProps<{ id: string }> {
   productos: IProducto[];
+  session: IGetUsuario;
 }
 
 export interface INuevoPedidoState {}
@@ -22,6 +23,8 @@ class NuevoPedido extends React.Component<
   }
 
   public render() {
+    console.log(this.props);
+    const idVendedor = this.props.session.getUsuario.id;
     const { id } = this.props.match.params;
     const { productos } = this.props;
     return (
@@ -32,7 +35,11 @@ class NuevoPedido extends React.Component<
             <DatosCliente id={id} />
           </div>
           <div className="col-md-9">
-            <ContenidoPedido productos={productos} id={id} />
+            <ContenidoPedido
+              productos={productos}
+              id={id}
+              idVendedor={idVendedor}
+            />
           </div>
         </div>
       </React.Fragment>

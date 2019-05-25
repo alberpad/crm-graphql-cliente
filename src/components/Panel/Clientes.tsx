@@ -19,10 +19,12 @@ const Clientes = (props: IClientesProps) => {
         if (loading) return <Spinner />;
         if (error) return `Error: ${error.message}`;
         if (!data) return null;
+        console.log(data);
         let datosGrafica: IDatosGrafica[] = [];
+
         data.topClientes.map(topCliente =>
           datosGrafica.push({
-            nombre: topCliente.cliente[0].nombre,
+            nombre: topCliente.cliente[0] && topCliente.cliente[0].nombre,
             total: topCliente.total
           })
         );

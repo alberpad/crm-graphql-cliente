@@ -111,7 +111,7 @@ export const NUEVO_USUARIO = gql`
 `;
 
 export const AUTENTICAR_USUARIO = gql`
-  mutation autenticarUsuario($input: UsuarioInput) {
+  mutation autenticarUsuario($input: AutenticarInput) {
     autenticarUsuario(input: $input) {
       token
     }

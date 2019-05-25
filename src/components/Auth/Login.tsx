@@ -1,11 +1,16 @@
 import React from "react";
 import { Mutation, MutationFn, MutationResult } from "react-apollo";
 import { AUTENTICAR_USUARIO } from "../../data/mutations";
-import { IUsuario, IDataAutenticar } from "../../data/types";
+import { IUsuario, IDataAutenticar, IGetUsuario } from "../../data/types";
 import { RouteComponentProps } from "react-router";
 import Error from "../Alertas/Error";
+import { OperationVariables, ApolloQueryResult } from "apollo-boost";
 
-export interface ILoginProps extends RouteComponentProps {}
+export interface ILoginProps extends RouteComponentProps {
+  refetch: (
+    variables?: OperationVariables | undefined
+  ) => Promise<ApolloQueryResult<IGetUsuario>>;
+}
 
 export interface ILoginState {
   usuario: string;
@@ -44,21 +49,6 @@ class Login extends React.Component<ILoginProps, ILoginState> {
     else return false;
   };
 
-  // handleOnSubmit = (e: React.FormEvent, autenticarUsuario: MutationFn) => {
-  //   e.preventDefault();
-  //   const { usuario, password } = this.state;
-  //   const input = {
-  //     usuario,
-  //     password
-  //   };
-  //   autenticarUsuario({ variables: { input } }).then(data => {
-  //     this.limpiarState();
-  //     this.props.history.push("/productos");
-
-  //     console.log(data);
-  //   });
-  // };
-
   handleOnSubmit = async (
     e: React.FormEvent,
     autenticarUsuario: MutationFn
@@ -69,12 +59,18 @@ class Login extends React.Component<ILoginProps, ILoginState> {
       usuario,
       password
     };
+    console.log(input);
     const response = await autenticarUsuario({ variables: { input } });
+    console.log(response);
     if (!response) return null;
     const data: IDataAutenticar = response.data;
     localStorage.setItem("token", data.autenticarUsuario.token);
+    await this.props.refetch();
     this.limpiarState();
-    this.props.history.push("/productos");
+    // setTimeout(() => {
+    //   this.props.history.push("/panel");
+    // }, 1500);
+    this.props.history.push("panel");
   };
 
   public render() {

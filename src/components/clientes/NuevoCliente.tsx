@@ -1,10 +1,12 @@
 import React from "react";
-import { ICliente } from "../../data/types";
+import { ICliente, IGetUsuario } from "../../data/types";
 import { NUEVO_CLIENTE } from "../../data/mutations";
 import { Mutation, MutationFn } from "react-apollo";
 import { RouteComponentProps } from "react-router";
 
-export interface INuevoClienteProps extends RouteComponentProps {}
+export interface INuevoClienteProps extends RouteComponentProps {
+  session: IGetUsuario;
+}
 export interface INuevoClienteState extends Partial<ICliente> {
   cliente: Partial<ICliente>;
   emails: { email: string }[];
@@ -18,7 +20,11 @@ class NuevoCliente extends React.Component<
     emails: []
   };
 
-  handleOnSubmit = (e: React.FormEvent, crearCliente: MutationFn) => {
+  handleOnSubmit = (
+    e: React.FormEvent,
+    crearCliente: MutationFn,
+    idVendedor: string
+  ) => {
     e.preventDefault();
     const { nombre, apellido, edad, empresa, tipo } = this.state.cliente;
     const { emails } = this.state;
@@ -28,7 +34,8 @@ class NuevoCliente extends React.Component<
       edad: Number(edad),
       emails,
       empresa,
-      tipo
+      tipo,
+      idVendedor
     };
     crearCliente({
       variables: { input }
@@ -81,6 +88,7 @@ class NuevoCliente extends React.Component<
   };
 
   render() {
+    const idVendedor = this.props.session.getUsuario.id;
     return (
       <React.Fragment>
         <h2 className="text-center">Nuevo Cliente</h2>
@@ -91,7 +99,7 @@ class NuevoCliente extends React.Component<
           >
             {(crearCliente: MutationFn) => (
               <form
-                onSubmit={e => this.handleOnSubmit(e, crearCliente)}
+                onSubmit={e => this.handleOnSubmit(e, crearCliente, idVendedor)}
                 className="col-md-8 m-3"
               >
                 <div className="form-row">

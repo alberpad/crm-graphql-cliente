@@ -10,6 +10,7 @@ export interface IGenerarPedidoProps extends RouteComponentProps {
   productos: IProductosPedidos[];
   total: number;
   clienteId: string;
+  idVendedor: string;
 }
 const validarPedido = (props: IGenerarPedidoProps): boolean => {
   const { productos, total } = props;
@@ -28,7 +29,8 @@ const handleOnClickGenerarPedido = (
       ({ nombre, precio, stock, ...resto }) => resto
     ),
     total: props.total,
-    id: ""
+    id: "",
+    idVendedor: props.idVendedor
   };
   nuevoPedido({
     variables: { input }

@@ -7,6 +7,7 @@ export interface IGetCliente {
 }
 export interface ICliente {
   id: string;
+  idVendedor: string;
   nombre: string;
   apellido: string;
   empresa: string;
@@ -54,6 +55,7 @@ export interface IPedido {
   cliente: string;
   estado?: string;
   fecha?: Date;
+  idVendedor: string;
 }
 export interface IGetPedidos {
   getPedidos: Partial<IPedido>[];
@@ -76,5 +78,14 @@ export interface ITopClientes {
 export interface IDataAutenticar {
   autenticarUsuario: {
     token: string;
+  };
+}
+
+export interface IGetUsuario {
+  getUsuario: {
+    id: string;
+    usuario: string;
+    nombre: string;
+    rol: string;
   };
 }

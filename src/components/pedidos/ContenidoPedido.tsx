@@ -11,6 +11,7 @@ import Error from "../Alertas/Error";
 export interface IContenidoPedidoProps {
   productos: IProducto[];
   id: string;
+  idVendedor: string;
 }
 
 export interface IContenidoPedidoState {
@@ -115,6 +116,7 @@ export default class ContenidoPedido extends React.Component<
           productos={this.state.productosPedidos}
           total={this.state.total}
           clienteId={this.props.id}
+          idVendedor={this.props.idVendedor}
         />
       </React.Fragment>
     );

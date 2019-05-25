@@ -1,8 +1,20 @@
 import gql from "graphql-tag";
 
+// export const GET_CLIENTES = gql`
+//   query getClientes($limite: Int, $offset: Int) {
+//     getClientes(limite: $limite, offset: $offset) {
+//       id
+//       nombre
+//       apellido
+//       empresa
+//     }
+//     totalClientes
+//   }
+// `;
+
 export const GET_CLIENTES = gql`
-  query getClientes($limite: Int, $offset: Int) {
-    getClientes(limite: $limite, offset: $offset) {
+  query getClientes($limite: Int, $offset: Int, $idVendedor: String) {
+    getClientes(limite: $limite, offset: $offset, idVendedor: $idVendedor) {
       id
       nombre
       apellido
@@ -76,6 +88,17 @@ export const TOP_CLIENTES = gql`
         apellido
         tipo
       }
+    }
+  }
+`;
+
+export const USUARIO_ACTUAL = gql`
+  query getUsuario {
+    getUsuario {
+      usuario
+      id
+      nombre
+      rol
     }
   }
 `;

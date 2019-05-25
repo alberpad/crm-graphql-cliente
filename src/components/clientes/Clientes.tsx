@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Query, QueryResult, Mutation, MutationFn } from "react-apollo";
 import { GET_CLIENTES } from "../../data/queries";
 import { ELIMINAR_CLIENTE } from "../../data/mutations";
-import { IGetClientes } from "../../data/types";
+import { IGetClientes, IGetUsuario } from "../../data/types";
 import Swal from "sweetalert2";
 import Spinner from "../Spinner";
 import Paginador from "../layout/Paginador";
@@ -17,6 +17,7 @@ export interface IClientesProps {
     paginaAnterior: () => void;
     paginaSiguiente: () => void;
   };
+  session: IGetUsuario;
 }
 export interface IClientesState {
   // paginador: {
@@ -57,6 +58,14 @@ class Clientes extends React.Component<IClientesProps, IClientesState> {
 
   render() {
     const { paginador } = this.props;
+    let id;
+    const { rol } = this.props.session.getUsuario;
+    if (rol === "VENDEDOR") {
+      id = this.props.session.getUsuario.id;
+    } else {
+      id = "";
+    }
+
     return (
       //pollInterval es para recargar automaticamente la consulta y por ende la página
       // startPolling y stopPolling son necesarias aunque no se usen directamnte ?? Parece que no
@@ -67,7 +76,8 @@ class Clientes extends React.Component<IClientesProps, IClientesState> {
           // limite: this.limitePaginas,
           limite: paginador.limitePaginas,
           // offset: this.state.paginador.offset
-          offset: paginador.offset
+          offset: paginador.offset,
+          idVendedor: id
         }}
       >
         {({
