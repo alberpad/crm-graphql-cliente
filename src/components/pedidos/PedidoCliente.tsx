@@ -32,25 +32,33 @@ function PedidoCliente(props: IPedidoClienteProps) {
     actualizarPedido({ variables: { input } });
   };
 
-  let clase: string;
+  let claseBg: string;
   if (estado === "PENDIENTE") {
-    clase = "bg-danger";
+    claseBg = "bg-danger";
   } else if (estado === "CANCELADO") {
-    clase = "bg-light";
+    claseBg = "bg-light";
   } else {
-    clase = "bg-success";
+    claseBg = "bg-success";
+  }
+  let claseBorder: string;
+  if (estado === "PENDIENTE") {
+    claseBorder = "border-danger";
+  } else if (estado === "CANCELADO") {
+    claseBorder = "border-light";
+  } else {
+    claseBorder = "border-success";
   }
 
   return (
     <div className="col-md-4">
-      <div className={`card mb-3`}>
+      <div className={`card mb-3 ${claseBorder}`}>
         <div className="card-body">
           <p className="card-text font-weight-bold ">
             Estado:
             <Mutation mutation={ACTUALIZAR_PEDIDO}>
               {(actualizarPedido: MutationFn) => (
                 <select
-                  className={`form-control my-3 ${clase}`}
+                  className={`form-control my-3 ${claseBg}`}
                   value={pedido.estado}
                   onChange={e => handleOnChange(e, pedido, actualizarPedido)}
                 >
@@ -76,7 +84,9 @@ function PedidoCliente(props: IPedidoClienteProps) {
             <span className="font-weight-normal ml-2">$ {pedido.total}</span>
           </p>
 
-          <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
+          <h3 className="card-text text-center mb-3 resaltar-texto">
+            Artículos del pedido
+          </h3>
           {pedido.productos &&
             pedido.productos.map((producto, index) => {
               const { id } = producto;
@@ -97,6 +107,12 @@ function PedidoCliente(props: IPedidoClienteProps) {
                 </Query>
               );
             })}
+          <div className="d-flex align-items-center justify-content-end">
+            <p className="card-text resaltar-texto bg-amarillo mr-1"> Total:</p>
+            <p className="font-weight-normal ml-2 inc-texto">
+              $ {pedido.total}
+            </p>
+          </div>
         </div>
       </div>
     </div>

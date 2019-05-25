@@ -5,6 +5,7 @@ import { GET_PEDIDOS } from "../../data/queries";
 import { IGetPedidos } from "../../data/types";
 import Spinner from "../Spinner";
 import PedidoCliente from "../pedidos/PedidoCliente";
+import "./pedidos.css";
 
 export interface IPedidosClienteProps
   extends RouteComponentProps<{ id: string }> {}

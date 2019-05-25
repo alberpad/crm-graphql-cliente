@@ -42,6 +42,8 @@ export interface IProducto {
 export interface IUsuario {
   usuario: string;
   password: string;
+  nombre: string;
+  rol: string;
 }
 
 export interface IProductosPedidos extends IProducto {
@@ -73,6 +75,15 @@ export interface IMejorCliente {
 
 export interface ITopClientes {
   topClientes: IMejorCliente[];
+}
+
+export interface IMejorVendedor {
+  total: number;
+  vendedor: IUsuario[];
+}
+
+export interface ITopVendedores {
+  topVendedores: IMejorVendedor[];
 }
 
 export interface IDataAutenticar {
